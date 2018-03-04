@@ -1,0 +1,23 @@
+{
+  "name": "spotify-shortcuts",
+  "version": "1.0.0",
+  "description": "Provides \"Pause/Play\" and \"play copied Spotify-URI\" shortcut for Spotify Desktop on Windows.",
+  "main": "index.js",
+  "scripts": {
+    "start": "electron .",
+    "dist": "electron-builder"
+  },
+  "keywords": [],
+  "author": "Ivan Seniv<seniv97@gmail.com>",
+  "license": "ISC",
+  "dependencies": {
+    "spotilocal": "^0.4.4"
+  },
+  "devDependencies": {
+    "electron": "^1.8.2",
+    "electron-builder": "^20.2.0"
+  },
+  "build": {
+    "appId": "spotify.shortcuts"
+  }
+}
