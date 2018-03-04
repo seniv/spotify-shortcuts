@@ -21,6 +21,8 @@ npm run build
 ```
 ## Change shortcuts
 If you wanna change shortcuts you need to modify `index.js` file
+## Stop this app
+Just kill process in Task Manager
 ## Launch on windows startup
 Make shortcut of exe file (if you already builded the app) and put it to `%USERPROFILE%\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Startup`
 ## Why?
