@@ -1,17 +1,18 @@
 # spotify-shortcuts
-Provides "Pause/Play" and "play copied Spotify-URI" shortcut for Spotify Desktop on Windows.
+Provides "Pause/Play" and "play copied Spotify-URI" shortcuts for Spotify Desktop on Windows.
 ## How it works
 Just run this application (from command line or already builded exe file) and after couple seconds the app has been ready.
-## Default shortcuts
-`Alt+Shift+1` - Pause/Play
-
-`Alt+Shift+2` - play copied Spotify-URI
 ## Let's start
 ```
 git clone https://github.com/seniv/spotify-shortcuts.git
 cd spotify-shortcuts
+npm install
 npm start
 ```
+## Default shortcuts
+`Alt+Shift+1` - Pause/Play
+
+`Alt+Shift+2` - play copied Spotify-URI
 ## What is "play copied Spotify-URI"?
 You can get URI of each track on spotify (for example from friend) and if you have this URI in clipboard - you can start playing this track by using shortcut
 ## build "exe" file
