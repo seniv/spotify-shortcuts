@@ -11,7 +11,11 @@
   "author": "Ivan Seniv<seniv97@gmail.com>",
   "license": "ISC",
   "dependencies": {
-    "spotilocal": "^0.4.4"
+    "express": "^4.16.2",
+    "loudness": "^0.2.2",
+    "node-media-controller": "0.0.6",
+    "spotilocal": "^0.4.4",
+    "win-audio": "^1.1.8"
   },
   "devDependencies": {
     "electron": "^1.8.2",

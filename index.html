@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <style>
+    .container {
+      margin-top: 20px;
+      margin-left: 20px;
+      border-radius: 15px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background-color: #fff;
+      box-shadow: rgba(37, 37, 37, 0.5) 0 0 20px 0px;
+      width: 150px;
+      height: 150px;
+      opacity: 0;
+    }
+    .volume{
+      margin-top: 15px;
+    }
+    .volume-indicator {
+      width: 6px;
+      height: 6px;
+      margin: 0 1.5px;
+      display: inline-block;
+      background-color: #e6e7e8;
+      border-radius: 1px;
+    }
+    .filled {
+      background-color: #8899a6;
+    }
+    .anime {
+      animation: disappear 2s;
+    }
+    @keyframes disappear {
+      from {
+        opacity: 1;
+      }
+      50% {
+        opacity: 1;
+      }
+      to {
+        opacity: 0;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container" id="main">
+    <img id="micImage" src="./emojis/mic.svg" style="width:100px;display:none;"/>
+    <img id="muteImage" src="./emojis/1f507.svg" style="width:100px;display:none;"/>
+    <div id="volumeBlock">
+      <img id="volumeImage" src="./emojis/1f508.svg" style="width:70px;display:block;margin:auto;"/>
+      <div class="volume">
+        <div class="volume-indicator"></div>
+        <div class="volume-indicator"></div>
+        <div class="volume-indicator"></div>
+        <div class="volume-indicator"></div>
+        <div class="volume-indicator"></div>
+        <div class="volume-indicator"></div>
+        <div class="volume-indicator"></div>
+        <div class="volume-indicator"></div>
+        <div class="volume-indicator"></div>
+        <div class="volume-indicator"></div>
+      </div>
+    </div>
+  </div>
+  <script>
+    const { ipcRenderer } = require('electron')
+    const micImage = document.getElementById('micImage')
+    const volumeIndicators = document.getElementsByClassName('volume-indicator')
+    const volumeBlock = document.getElementById('volumeBlock')
+    const volumeImage = document.getElementById('volumeImage')
+    const muteImage = document.getElementById('muteImage')
+    const el = document.getElementById('main')
+    ipcRenderer.on('info', (event, data) => {
+      el.classList.remove('anime')
+      void el.offsetWidth
+      el.classList.add('anime')
+
+      if(data.isMicMuted !== undefined) {
+        micImage.src = data.isMicMuted ? './emojis/mutedmic.svg' : './emojis/mic.svg'
+        micImage.style.display = 'inline-block'
+        muteImage.style.display = 'none'
+        volumeBlock.style.display = 'none'
+        return
+      } else {
+        micImage.style.display = 'none'
+      }
+
+      muteImage.style.display = data.isAudioMuted ? 'inline-block' : 'none'
+      volumeBlock.style.display = data.isAudioMuted ? 'none' : 'block'
+      for (let i = 0; i < volumeIndicators.length; i++) {
+        volumeIndicators[i].className = i * 10 >= data.volume ? 'volume-indicator' : 'filled volume-indicator'
+      }
+
+      if(data.volume <= 20) volumeImage.src = './emojis/1f508.svg'
+      else if(data.volume > 20 && data.volume <= 40) volumeImage.src = './emojis/1f509.svg'
+      else if(data.volume > 50 && data.volume <= 70) volumeImage.src = './emojis/middle.svg'
+      else if(data.volume > 70) volumeImage.src = './emojis/1f50a.svg'
+    })
+  </script>
+</body>
+</html>
